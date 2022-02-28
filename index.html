@@ -9,7 +9,7 @@
       crossorigin
     ></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.0/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.0/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script></script>
   </head>
   <body>
     <div id="root"></div>
@@ -23,14 +23,24 @@
         }
 
         async componentDidMount() {
-          const humans = await axios.get('/api/humans' )
+          const humans = await axios.get('/api/humans')
           this.setState({data: humans.data})
         }
 
         render() {
-          const html = <ul>{this.state.data.map((x)=> {
-            return <li>x.name</li>
-          })}</ul>;
+          const html = <div>
+            <h1>List of Random Humans</h1>
+          <ul>
+            {this.state.data.map((x) => {
+              return (<div><li>{x.name}</li>
+                <ul>
+                <li>{x.phone}</li>
+                <li>{x.email}</li>
+                </ul>
+                <p></p>
+                </div>)
+            })}
+            </ul></div>
           return html;
         }
       }
